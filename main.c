@@ -16,7 +16,7 @@ int main()
         printf("4 - Comparar duas pessoas\n");
         printf("5 - Encontrar pessoa mais semelhante\n");
         printf("6 - Exibir ranking de afinidade\n");
-        printf("7 - Analisar preferências de duas pessoas\n");
+        printf("7 - Analisar preferÃªncias de duas pessoas\n");
         printf("0 - Encerrar\n");
         printf("Opcao:\n ");
         scanf("%d",&opcao);
@@ -26,7 +26,7 @@ int main()
                 break;
             case 2:ExibePessoas(&pessoa);
                 break;
-            case 3:printf("\n");
+            case 3:BuscaPessoas(pessoa.nome, pessoa.qtdCadastrados);
                 break;
             case 4:printf("\n");
                 break;
