@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "afinidade.h"
 
 float leNotaValida(void){
@@ -58,4 +59,20 @@ void ExibePessoas(Pessoas *pessoa){
     }
     printf("=================================================================\n");
     return;
+}
+
+int BuscaPessoas(char nomes[][50], int quantidadePessoas) {
+    char nomeProcurado[50];
+    
+    printf("Digite o nome do usuario que deseja encontrar: ");
+    scanf(" %[^\n]", nomeProcurado); 
+
+    for (int i = 0; i < quantidadePessoas; i++) {
+        if (strcmp(nomeProcurado, nomes[i]) == 0) { 
+            return i; 
+        }
+    }
+    
+    printf("\nUsuario não encontrado.\n");
+    return -1; 
 }
