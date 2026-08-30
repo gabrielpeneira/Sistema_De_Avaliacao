@@ -11,7 +11,7 @@ typedef struct{
 
 void CadastraPessoas(Pessoas *pessoa);
 void ExibePessoas(Pessoas *pessoa);
-void BuscaPessoas();
+int BuscaPessoas(char nomes[][50], int quantidadePessoas);
 void ComparaPessoas();
 void EncontraAfinidade();
 void ExibeRanking();
