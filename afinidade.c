@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "afinidade.h"
+#include <math.h>
 
 float leNotaValida(void){
     float nota;
@@ -63,16 +64,32 @@ void ExibePessoas(Pessoas *pessoa){
 
 int BuscaPessoas(char nomes[][50], int quantidadePessoas) {
     char nomeProcurado[50];
-    
+
     printf("Digite o nome do usuario que deseja encontrar: ");
-    scanf(" %[^\n]", nomeProcurado); 
+    scanf(" %[^\n]", nomeProcurado);
 
     for (int i = 0; i < quantidadePessoas; i++) {
-        if (strcmp(nomeProcurado, nomes[i]) == 0) { 
-            return i; 
+        if (strcmp(nomeProcurado, nomes[i]) == 0) {
+            return i;
         }
     }
-    
+
     printf("\nUsuario não encontrado.\n");
-    return -1; 
+    return -1;
+}
+void ComparaPessoas(Pessoas *pessoa, int i, int j){
+    float soma=0;
+    float diferenca=0;
+
+    printf("Comparando %s e %s:\n",pessoa->nome[i], pessoa->nome[j]);
+
+    for(int k=0; k< QTD_PREF; k++){
+        diferenca = fabs(pessoa->notas[i][k] - pessoa->notas[j][k]);
+        soma+=diferenca;
+
+        printf("Topico %d - %s: %.1f | %s: %.1f | diferenca: %.1f\n",k+1, pessoa->nome[i], pessoa->notas[i][k], pessoa->nome[j], pessoa->notas[j][k], diferenca);
+
+    }
+    float afinidade=10-(soma/QTD_PREF);
+    printf("afinidade:%.2f",afinidade);
 }
