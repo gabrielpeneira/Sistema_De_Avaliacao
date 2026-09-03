@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "afinidade.h"
 #include <math.h>
-
+#include "afinidade.h"
 float leNotaValida(void){
     float nota;
     int valida=0;
@@ -77,19 +76,33 @@ int BuscaPessoas(char nomes[][50], int quantidadePessoas) {
     printf("\nUsuario não encontrado.\n");
     return -1;
 }
-void ComparaPessoas(Pessoas *pessoa, int i, int j){
+float EncontraAfinidade(Pessoas *pessoa, int i, int j){
     float soma=0;
     float diferenca=0;
 
-    printf("Comparando %s e %s:\n",pessoa->nome[i], pessoa->nome[j]);
+
 
     for(int k=0; k< QTD_PREF; k++){
-        diferenca = fabs(pessoa->notas[i][k] - pessoa->notas[j][k]);
-        soma+=diferenca;
+        diferenca = (pessoa->notas[i][k] - pessoa->notas[j][k]);
+        soma = soma + (diferenca * diferenca);
+        }
 
-        printf("Topico %d - %s: %.1f | %s: %.1f | diferenca: %.1f\n",k+1, pessoa->nome[i], pessoa->notas[i][k], pessoa->nome[j], pessoa->notas[j][k], diferenca);
 
+    return sqrt(soma);
+}
+void ComparaPessoas(Pessoas *pessoa, int quantidadePessoas){
+
+    int i , j;
+
+    printf("Primeira pessoa:\n");
+    i=BuscaPessoas(pessoa->nome, quantidadePessoas);
+    printf("Segunda pessoa:\n");
+    j=BuscaPessoas(pessoa->nome, quantidadePessoas);
+
+    if(i == -1 || j==-1 ||i==j){
+        return;
     }
-    float afinidade=10-(soma/QTD_PREF);
-    printf("afinidade:%.2f",afinidade);
+    printf("COMPARACAO DE PERFIS\n");
+    printf("%s x %s\n",pessoa[i].nome,&pessoa[j].nome);
+    printf("distancia euclidiana:%.2f\n",EncontraAfinidade(pessoa,i,j));
 }

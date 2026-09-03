@@ -28,12 +28,7 @@ int main()
                 break;
             case 3:BuscaPessoas(pessoa.nome, pessoa.qtdCadastrados);
                 break;
-            case 4:
-                printf("Primeira pessoa:\n");
-                int i= BuscaPessoas(pessoa.nome, pessoa.qtdCadastrados);
-                printf("Segunda pessoa:\n");
-                int j= BuscaPessoas(pessoa.nome, pessoa.qtdCadastrados);
-                ComparaPessoas(&pessoa, i, j);
+            case 4:ComparaPessoas(&pessoa, pessoa.qtdCadastrados);
                 break;
             case 5:printf("\n");
                 break;
