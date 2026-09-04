@@ -103,6 +103,83 @@ void ComparaPessoas(Pessoas *pessoa, int quantidadePessoas){
         return;
     }
     printf("COMPARACAO DE PERFIS\n");
-    printf("%s x %s\n",pessoa[i].nome,&pessoa[j].nome);
+    printf("%s x %s\n",pessoa->nome[i],pessoa->nome[j]);
     printf("distancia euclidiana:%.2f\n",EncontraAfinidade(pessoa,i,j));
+}
+void ComparaAfinidade(Pessoas *pessoa, int quantidadedePessoas, int i){
+    float menorDist=0;
+    float dist=0;;
+    int indMenor=-1;
+
+    for(int j=0;j<quantidadedePessoas;j++){
+        if(i!=j){
+                dist=EncontraAfinidade(pessoa,i,j);
+            if(indMenor==-1||menorDist>dist){
+                menorDist=dist;
+                indMenor=j;
+            }
+        }
+    }
+    if(indMenor==-1){
+        printf("nao ha outa pessoa a ser comparada\n");
+        return;
+    }
+    printf("\nPessoa analisada: %s\n", pessoa->nome[i]);
+    printf("Pessoa mais semelhante: %s\n", pessoa->nome[indMenor]);
+    printf("Distancia euclidiana: %.2f\n", menorDist);
+
+
+}
+void ExibeRanking(Pessoas *pessoa, int quantidadePessoas, int i){
+
+    float distancias[MAX_PESSOAS];
+    int indices[MAX_PESSOAS];
+    int qtd = 0;
+
+    // Calcula distancia para todas as outras pessoas
+    for(int j = 0; j < quantidadePessoas; j++){
+
+        if(i != j){
+
+            distancias[qtd] = EncontraAfinidade(pessoa, i, j);
+            indices[qtd] = j;
+
+            qtd++;
+        }
+    }
+
+    // Ordenacao
+    for(int a = 0; a < qtd - 1; a++){
+
+        for(int b = a + 1; b < qtd; b++){
+
+            if(distancias[b] < distancias[a]){
+
+                // troca distancia
+                float auxDist = distancias[a];
+                distancias[a] = distancias[b];
+                distancias[b] = auxDist;
+
+                // troca indice
+                int auxIndice = indices[a];
+                indices[a] = indices[b];
+                indices[b] = auxIndice;
+            }
+        }
+    }
+
+    // Exibe ranking
+    printf("\n====================================\n");
+    printf("RANKING DE AFINIDADE COM %s\n", pessoa->nome[i]);
+    printf("====================================\n");
+
+    for(int j = 0; j < qtd; j++){
+
+        printf("%d - %-20s distancia: %.2f\n",
+               j + 1,
+               pessoa->nome[indices[j]],
+               distancias[j]);
+    }
+
+    printf("====================================\n");
 }

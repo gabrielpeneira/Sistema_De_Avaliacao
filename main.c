@@ -16,7 +16,7 @@ int main()
         printf("4 - Comparar duas pessoas\n");
         printf("5 - Encontrar pessoa mais semelhante\n");
         printf("6 - Exibir ranking de afinidade\n");
-        printf("7 - Analisar preferências de duas pessoas\n");
+        printf("7 - Analisar preferencias de duas pessoas\n");
         printf("0 - Encerrar\n");
         printf("Opcao:\n ");
         scanf("%d",&opcao);
@@ -30,10 +30,20 @@ int main()
                 break;
             case 4:ComparaPessoas(&pessoa, pessoa.qtdCadastrados);
                 break;
-            case 5:printf("\n");
+            case 5:printf("comparando todos os perfis\n");
+            int j =BuscaPessoas(pessoa.nome,pessoa.qtdCadastrados);
+            if(j!=-1){
+                ComparaAfinidade(&pessoa,pessoa.qtdCadastrados,j);
+            }
                 break;
-            case 6:printf("\n");
+            case 6:
+                printf("\nEscolha a pessoa para gerar o ranking:\n");
+                int indice = BuscaPessoas(pessoa.nome,pessoa.qtdCadastrados);
+                    if(indice != -1){
+                        ExibeRanking(&pessoa,pessoa.qtdCadastrados,indice);
+                    }
                 break;
+
             case 7:printf("\n");
                 break;
             case 0:printf("\n");
