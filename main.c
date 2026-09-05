@@ -30,18 +30,9 @@ int main()
                 break;
             case 4:ComparaPessoas(&pessoa, pessoa.qtdCadastrados);
                 break;
-            case 5:printf("comparando todos os perfis\n");
-            int j =BuscaPessoas(pessoa.nome,pessoa.qtdCadastrados);
-            if(j!=-1){
-                ComparaAfinidade(&pessoa,pessoa.qtdCadastrados,j);
-            }
+            case 5:ComparaAfinidade(&pessoa, pessoa.qtdCadastrados);
                 break;
-            case 6:
-                printf("\nEscolha a pessoa para gerar o ranking:\n");
-                int indice = BuscaPessoas(pessoa.nome,pessoa.qtdCadastrados);
-                    if(indice != -1){
-                        ExibeRanking(&pessoa,pessoa.qtdCadastrados,indice);
-                    }
+            case 6:ExibeRanking(&pessoa,pessoa.qtdCadastrados);
                 break;
 
             case 7:printf("\n");

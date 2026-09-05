@@ -106,7 +106,16 @@ void ComparaPessoas(Pessoas *pessoa, int quantidadePessoas){
     printf("%s x %s\n",pessoa->nome[i],pessoa->nome[j]);
     printf("distancia euclidiana:%.2f\n",EncontraAfinidade(pessoa,i,j));
 }
-void ComparaAfinidade(Pessoas *pessoa, int quantidadedePessoas, int i){
+void ComparaAfinidade(Pessoas *pessoa, int quantidadedePessoas){
+    int i;
+    printf("comparando todos os perfis\n");
+    do{
+    i =BuscaPessoas(pessoa->nome, pessoa->qtdCadastrados);
+    if(i==-1){
+        printf("nome invalido");
+    }
+    }while(i==-1);
+
     float menorDist=0;
     float dist=0;;
     int indMenor=-1;
@@ -130,45 +139,40 @@ void ComparaAfinidade(Pessoas *pessoa, int quantidadedePessoas, int i){
 
 
 }
-void ExibeRanking(Pessoas *pessoa, int quantidadePessoas, int i){
-
+void ExibeRanking(Pessoas *pessoa, int quantidadePessoas){
+    int i;
+    do{
+    printf("\nEscolha a pessoa para gerar o ranking:\n");
+    i = BuscaPessoas(pessoa->nome,pessoa->qtdCadastrados);
+    if(i != -1){
+        printf("nome invalido");
+    }
+    }while(i==-1);
     float distancias[MAX_PESSOAS];
     int indices[MAX_PESSOAS];
     int qtd = 0;
-
-    // Calcula distancia para todas as outras pessoas
     for(int j = 0; j < quantidadePessoas; j++){
 
         if(i != j){
-
             distancias[qtd] = EncontraAfinidade(pessoa, i, j);
             indices[qtd] = j;
-
             qtd++;
         }
     }
-
-    // Ordenacao
     for(int a = 0; a < qtd - 1; a++){
 
         for(int b = a + 1; b < qtd; b++){
 
             if(distancias[b] < distancias[a]){
-
-                // troca distancia
                 float auxDist = distancias[a];
                 distancias[a] = distancias[b];
                 distancias[b] = auxDist;
-
-                // troca indice
                 int auxIndice = indices[a];
                 indices[a] = indices[b];
                 indices[b] = auxIndice;
             }
         }
     }
-
-    // Exibe ranking
     printf("\n====================================\n");
     printf("RANKING DE AFINIDADE COM %s\n", pessoa->nome[i]);
     printf("====================================\n");

@@ -14,8 +14,8 @@ void ExibePessoas(Pessoas *pessoa);
 int BuscaPessoas(char nomes[][50], int quantidadePessoas);
 void ComparaPessoas(Pessoas *pessoa,int quantidadePessoas);
 float EncontraAfinidade(Pessoas *pessoa, int i, int j);
-void ExibeRanking(Pessoas *pessoa, int quantidadePessoas, int i);
-void ComparaAfinidade(Pessoas *pessoa, int quantidadedePessoas, int i);
+void ExibeRanking(Pessoas *pessoa, int quantidadePessoas);
+void ComparaAfinidade(Pessoas *pessoa, int quantidadedePessoas);
 void AnalisaPreferencia();
 
 
