@@ -1,22 +1,25 @@
 #ifndef AFINIDADE_H_INCLUDED
 #define AFINIDADE_H_INCLUDED
-#define MAX_PESSOAS 30
+
 #define QTD_PREF 6
 
-typedef struct{
-    char nome[MAX_PESSOAS][50];
-    float notas[MAX_PESSOAS][QTD_PREF];
+typedef struct {
+    char nome[50];
+    float notas[QTD_PREF];
+} Pessoa;
+
+typedef struct {
+    Pessoa *pessoas; 
     int qtdCadastrados;
-} Pessoas;
+} Sistema;
 
-void CadastraPessoas(Pessoas *pessoa);
-void ExibePessoas(Pessoas *pessoa);
-int BuscaPessoas(char nomes[][50], int quantidadePessoas);
-void ComparaPessoas(Pessoas *pessoa,int quantidadePessoas);
-float EncontraAfinidade(Pessoas *pessoa, int i, int j);
-void ExibeRanking(Pessoas *pessoa, int quantidadePessoas);
-void ComparaAfinidade(Pessoas *pessoa, int quantidadedePessoas);
-void AnalisaPreferencia();
-
+void CadastraPessoas(Sistema *sistema);
+void ExibePessoas(Sistema *sistema);
+int BuscaPessoas(Pessoa *pessoas, int quantidadePessoas); 
+float EncontraAfinidade(Sistema *sistema, int i, int j);
+void ComparaPessoas(Sistema *sistema);
+void ComparaAfinidade(Sistema *sistema);
+void ExibeRanking(Sistema *sistema);
+void AnalisaPreferencia(Sistema *sistema);
 
 #endif // AFINIDADE_H_INCLUDED
