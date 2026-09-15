@@ -171,9 +171,9 @@ void ExibeRanking(Sistema *sistema){
     } while(1);
     
     float *distancias = (float *)malloc(sistema->qtdCadastrados * sizeof(float));
-    int *indices = (int *)malloc(sistema->qtdCadastrados * sizeof(int));
+    Pessoa **ranking = (Pessoa **)malloc(sistema->qtdCadastrados * sizeof(Pessoa *));
     
-    if (distancias == NULL || indices == NULL) {
+    if (distancias == NULL || ranking == NULL) {
         printf("Erro de memoria ao gerar o ranking.\n");
         return;
     }
@@ -182,7 +182,7 @@ void ExibeRanking(Sistema *sistema){
     for(int j = 0; j < sistema->qtdCadastrados; j++){
         if(i != j){
             distancias[qtd] = EncontraAfinidade(sistema, i, j);
-            indices[qtd] = j;
+            ranking[qtd] = &sistema->pessoas[j];
             qtd++;
         }
     }
@@ -194,9 +194,9 @@ void ExibeRanking(Sistema *sistema){
                 distancias[a] = distancias[b];
                 distancias[b] = auxDist;
                 
-                int auxIndice = indices[a];
-                indices[a] = indices[b];
-                indices[b] = auxIndice;
+                Pessoa *auxPessoa = ranking[a];
+                ranking[a] = ranking[b];
+                ranking[b] = auxPessoa;
             }
         }
     }
@@ -208,14 +208,14 @@ void ExibeRanking(Sistema *sistema){
     for(int j = 0; j < qtd; j++){
         printf("%d - %-20s distancia: %.2f\n",
                j + 1,
-               sistema->pessoas[indices[j]].nome,
+               ranking[j]->nome, 
                distancias[j]);
     }
 
     printf("====================================\n");
     
     free(distancias);
-    free(indices);
+    free(ranking);
 }
 
 void AnalisaPreferencia(Sistema *sistema) {
